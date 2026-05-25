@@ -26,14 +26,14 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans-serif;color:var(--text0);overflow:hidden;-webkit-font-smoothing:antialiased;}
 
-/* SHELL */
+/* ── SHELL: fixed full-height, no scroll ── */
 .app{
   display:flex;flex-direction:column;
   height:100dvh;max-width:480px;margin:0 auto;
   background:var(--bg0);overflow:hidden;
 }
 
-/* HEADER */
+/* ── HEADER (fixed height) ── */
 .app-header{
   flex-shrink:0;
   padding:calc(var(--safe-top) + 8px) 18px 8px;
@@ -46,7 +46,7 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
 .logo-text span{color:var(--accent);}
 .header-time{font-family:'DM Mono',monospace;font-size:12px;color:var(--text2);}
 
-/* BOTTOM NAV */
+/* ── BOTTOM NAV (fixed height) ── */
 .bottom-nav{
   flex-shrink:0;padding-bottom:var(--safe-bottom);
   background:var(--bg1);border-top:1px solid var(--border);display:flex;
@@ -57,50 +57,47 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
 .nav-btn.active svg{stroke:var(--accent);filter:drop-shadow(0 0 4px rgba(79,209,197,0.5));}
 .nav-btn.active span{color:var(--accent);}
 
-/* PAGE CONTAINER */
+/* ── PAGE CONTAINER (fills remaining height) ── */
 .pages{flex:1;overflow:hidden;position:relative;min-height:0;}
 .page{display:none;height:100%;overflow:hidden;}
 .page.active{display:flex;flex-direction:column;}
 
-/* MEASURE PAGE */
+/* ════════════════════════════════════
+   MEASURE PAGE — no-scroll layout
+   ════════════════════════════════════ */
 #page-measure{padding:0;}
 
-/* Input Card (Slider UI) */
+/* Row A: input card */
 .input-card{
   flex-shrink:0;
   margin:8px 14px 6px;
   background:var(--bg1);border-radius:18px;border:1px solid var(--border2);
   padding:12px 14px;
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;gap:10px;
   position:relative;overflow:hidden;
 }
 .input-card::after{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;}
 
-.clock-block .clock-time{font-family:'DM Mono',monospace;font-size:32px;font-weight:300;letter-spacing:-1.5px;line-height:1;color:var(--text0);}
+.clock-block .clock-time{font-family:'DM Mono',monospace;font-size:34px;font-weight:300;letter-spacing:-2px;line-height:1;color:var(--text0);}
 .clock-block .clock-sub{font-size:11px;color:var(--accent);font-weight:500;margin-top:2px;}
 .clock-block .clock-date{font-size:10px;color:var(--text2);margin-top:1px;}
 
-.divider-v{width:1px;height:50px;background:var(--border);flex-shrink:0;}
+.divider-v{width:1px;height:44px;background:var(--border);flex-shrink:0;}
 
-.input-area{flex:1;display:flex;flex-direction:column;gap:6px;}
-.input-lbl-container{display:flex;justify-content:space-between;align-items:center;}
+.input-area{flex:1;display:flex;flex-direction:column;gap:4px;}
 .input-lbl{font-size:9px;font-weight:600;color:var(--text2);letter-spacing:0.8px;text-transform:uppercase;}
-.input-val-display{font-family:'DM Mono',monospace;font-size:14px;font-weight:600;color:var(--accent);background:var(--bg3);padding:1px 6px;border-radius:4px;border:1px solid var(--border);}
-.input-row{display:flex;gap:10px;align-items:center;}
-
-/* Custom Range Slider */
-.slider-container{flex:1;display:flex;align-items:center;}
-.range-slider{
-  -webkit-appearance:none;width:100%;height:6px;border-radius:3px;
-  background:var(--bg3);outline:none;border:1px solid var(--border);
+.input-row{display:flex;gap:7px;align-items:center;}
+.num-input{
+  flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:11px;
+  color:var(--text0);font-family:'DM Mono',monospace;font-size:24px;font-weight:300;
+  padding:8px 10px;letter-spacing:-1px;outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+  -moz-appearance:textfield;appearance:textfield;
 }
-.range-slider::-webkit-slider-thumb{
-  -webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;
-  background:var(--accent);cursor:pointer;box-shadow:0 0 8px var(--accent-glow);
-  transition:transform 0.1s;
-}
-.range-slider::-webkit-slider-thumb:active{transform:scale(1.2);}
-
+.num-input::-webkit-inner-spin-button,.num-input::-webkit-outer-spin-button{-webkit-appearance:none;}
+.num-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-glow);}
+.num-input.error{border-color:var(--s3);box-shadow:0 0 0 2px rgba(249,112,102,0.18);}
+.num-input::placeholder{color:var(--text2);font-size:18px;}
 .record-btn{
   background:var(--accent);color:#081412;border:none;border-radius:11px;
   width:46px;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
@@ -110,7 +107,7 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
 .record-btn svg{width:16px;height:16px;}
 .record-btn span{font-size:9px;font-weight:600;}
 
-/* Result strip */
+/* Row B: result strip */
 .result-strip{
   flex-shrink:0;margin:0 14px 6px;
   border-radius:13px;border:1px solid var(--border);overflow:hidden;
@@ -128,7 +125,7 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
 .rsm-v{font-family:'DM Mono',monospace;font-size:14px;color:var(--text0);}
 .rsm-u{font-size:8px;color:var(--text2);}
 
-/* Date strip */
+/* Row C: date strip */
 .date-strip{
   flex-shrink:0;display:flex;gap:5px;
   overflow-x:auto;scrollbar-width:none;
@@ -145,7 +142,7 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
 .date-tab.active{background:var(--accent);color:#081412;border-color:var(--accent);font-weight:600;}
 .date-tab .dt-n{font-size:8px;margin-left:3px;opacity:0.7;}
 
-/* CHART */
+/* Row D: CHART — fills all remaining space */
 .chart-wrap{
   flex:1;min-height:0;
   margin:0 14px 6px;
@@ -161,14 +158,13 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
 .chart-legend{flex-shrink:0;display:flex;gap:10px;flex-wrap:wrap;margin-top:5px;}
 .cl-item{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--text2);}
 .cl-line{width:13px;height:2px;border-radius:1px;}
-.cl-area{width:13px;height:8px;border-radius:2px;opacity:0.15;}
 .cl-dot{width:6px;height:6px;border-radius:50%;}
 
-/* History list */
+/* Row E: history list — scrollable, compact */
 .history-panel{
   flex-shrink:0;
   margin:0 14px 6px;
-  max-height:115px;overflow-y:auto;scrollbar-width:none;
+  max-height:130px;overflow-y:auto;scrollbar-width:none;
 }
 .history-panel::-webkit-scrollbar{display:none;}
 .history-list{display:flex;flex-direction:column;gap:4px;}
@@ -187,7 +183,9 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
 .empty-box .em-ic{font-size:24px;margin-bottom:6px;}
 .empty-box p{font-size:11px;color:var(--text2);line-height:1.5;}
 
-/* GUIDE PAGE */
+/* ════════════════════════════════════
+   GUIDE PAGE — scrollable content
+   ════════════════════════════════════ */
 #page-guide{overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 #page-guide::-webkit-scrollbar{display:none;}
 .guide-wrap{padding:10px 14px 16px;}
@@ -217,7 +215,9 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
 .ri-name{font-size:12px;font-weight:500;color:var(--text0);margin-bottom:2px;}
 .ri-desc{font-size:11px;color:var(--text2);line-height:1.45;}
 
-/* ABOUT PAGE */
+/* ════════════════════════════════════
+   ABOUT PAGE — scrollable
+   ════════════════════════════════════ */
 #page-about{overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 #page-about::-webkit-scrollbar{display:none;}
 .about-wrap{padding:6px 14px 20px;}
@@ -243,21 +243,12 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
 .ref-row .rcol{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);width:52px;}
 .ref-row .rlcol{font-size:12px;color:var(--text1);flex:1;}
 .ref-row .rhcol{font-size:12px;color:var(--text1);}
-
-/* Backup/Restore Buttons */
-.backup-zone{display:flex;gap:8px;margin-top:4px;}
-.btn-secondary{
-  flex:1; background:var(--bg3); color:var(--text1); border:1px solid var(--border2);
-  padding:10px; border-radius:10px; font-size:11px; font-weight:500; cursor:pointer;
-  display:flex; align-items:center; justify-content:center; gap:6px; transition:all 0.15s;
-}
-.btn-secondary:active{background:var(--bg2); opacity:0.8;}
-#fileInput{display:none;}
 </style>
 </head>
 <body>
 <div class="app">
 
+  <!-- HEADER -->
   <div class="app-header">
     <div class="header-logo">
       <div class="logo-circle">🧬</div>
@@ -266,10 +257,13 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
     <div class="header-time" id="headerTime">—</div>
   </div>
 
+  <!-- PAGES -->
   <div class="pages">
 
+    <!-- ══ MEASURE (no-scroll) ══ -->
     <div class="page active" id="page-measure">
 
+      <!-- A: Input card -->
       <div class="input-card">
         <div class="clock-block">
           <div class="clock-time" id="clockTime">9:41</div>
@@ -278,15 +272,10 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
         </div>
         <div class="divider-v"></div>
         <div class="input-area">
-          <div class="input-lbl-container">
-            <div class="input-lbl">색도표 값</div>
-            <div class="input-val-display" id="sliderValDisplay">3.5</div>
-          </div>
+          <div class="input-lbl">색도표 값 (0.5 – 7.0)</div>
           <div class="input-row">
-            <div class="slider-container">
-              <input type="range" class="range-slider" id="colorSlider" 
-                min="0.5" max="7.0" step="0.5" value="3.5" oninput="updateSliderDisplay(this.value)">
-            </div>
+            <input class="num-input" type="number" id="colorInput"
+              min="0.5" max="7.0" step="0.5" placeholder="0.0" inputmode="decimal"/>
             <button class="record-btn" onclick="addMeasurement()">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
@@ -297,6 +286,7 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
         </div>
       </div>
 
+      <!-- B: Result strip -->
       <div class="result-strip" id="resultStrip">
         <div class="rs-header" id="rsHeader">
           <div class="rs-icon" id="rsIcon"></div>
@@ -312,8 +302,10 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
         </div>
       </div>
 
+      <!-- C: Date strip -->
       <div class="date-strip" id="dateStrip"></div>
 
+      <!-- D: Chart (fills remaining height) -->
       <div class="chart-wrap">
         <div class="chart-top">
           <span class="ct-lbl" id="chartLbl">일주기 코르티솔 리듬</span>
@@ -323,21 +315,24 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
           <canvas id="mainChart"></canvas>
         </div>
         <div class="chart-legend">
-          <div class="cl-item"><div class="cl-area" style="background:rgba(79,209,197,0.15); border:1px solid #4fd1c5;"></div>정상 범위 (Safe Zone)</div>
+          <div class="cl-item"><div class="cl-line" style="background:#4fd1c5;"></div>정상 상한</div>
+          <div class="cl-item"><div class="cl-line" style="background:rgba(79,209,197,0.3);border-top:1px dashed rgba(79,209,197,0.5);height:0;"></div>정상 하한</div>
           <div class="cl-item"><div class="cl-dot" style="background:#48d68a;"></div>정상</div>
           <div class="cl-item"><div class="cl-dot" style="background:#f97066;"></div>초과</div>
         </div>
       </div>
 
+      <!-- E: History (compact, inner scroll) -->
       <div class="history-panel" id="historyPanel">
         <div class="empty-box">
           <div class="em-ic">🧪</div>
-          <p>값을 슬라이드하고 기록을 눌러주세요</p>
+          <p>값을 입력하고 기록을 눌러주세요</p>
         </div>
       </div>
 
-    </div>
+    </div><!-- /page-measure -->
 
+    <!-- ══ GUIDE ══ -->
     <div class="page" id="page-guide">
       <div class="guide-wrap">
         <div class="info-box">
@@ -348,25 +343,14 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
       </div>
     </div>
 
+    <!-- ══ ABOUT ══ -->
     <div class="page" id="page-about">
       <div class="about-wrap">
         <div class="about-hero">
           <div class="ah-mark">🧬</div>
           <div class="ah-name">Corti<span>Sense</span></div>
-          <div class="ah-ver">v1.1.0 · 타액 코르티솔 모니터</div>
+          <div class="ah-ver">v1.0.0 · 타액 코르티솔 모니터</div>
         </div>
-        
-        <div class="sec-label">데이터 관리</div>
-        <div class="backup-zone">
-          <button class="btn-secondary" onclick="exportData()">
-            📤 데이터 백업 (JSON)
-          </button>
-          <button class="btn-secondary" onclick="document.getElementById('fileInput').click()">
-            📥 데이터 복구
-          </button>
-          <input type="file" id="fileInput" accept=".json" onchange="importData(event)">
-        </div>
-
         <div class="sec-label">기기 정보</div>
         <div class="about-card">
           <div class="about-row"><div class="ar-ic">📋</div><div><div class="ar-lbl">측정 방식</div><div class="ar-sub">타액 채취 → LFA 키트 → 색도표 비교</div></div></div>
@@ -396,8 +380,9 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
       </div>
     </div>
 
-  </div>
+  </div><!-- /pages -->
 
+  <!-- BOTTOM NAV -->
   <div class="bottom-nav">
     <button class="nav-btn active" onclick="gotoPage('measure',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -413,10 +398,10 @@ html,body{height:100%;background:var(--bg0);font-family:'DM Sans',system-ui,sans
     </button>
   </div>
 
-</div>
+</div><!-- /app -->
 
 <script>
-/* DATA */
+/* ── DATA ── */
 const TABLE=[
   {x:0.5,lo:22,hi:40,mid:31},{x:1.0,lo:15,hi:20,mid:17.5},
   {x:2.0,lo:10,hi:16,mid:13},{x:3.0,lo:7.5,hi:12,mid:9.75},
@@ -433,7 +418,7 @@ const STAGES=[
   {num:4,name:'고도 스트레스',short:'고도',emoji:'😱',color:'#c77dff',colorBg:'rgba(199,125,255,0.12)',colorDim:'rgba(199,125,255,0.22)',criterion:'정상 상한 × 2.0 초과',desc:'코르티솔이 심각하게 과다 분비된 상태입니다. 장기 지속 시 심혈관 질환, 대사증후군, 우울·불안 장애 등 만성 질환으로 이어질 수 있어 즉각적인 관리가 필요합니다.',symptoms:['극심한 피로감, 번아웃 증상','심계항진(두근거림), 혈압 상승','수면 장애: 불면 또는 과수면','체중 변화 (복부 지방 축적 경향)','심각한 집중력·판단력 저하','우울감, 무력감, 불안 발작','소화계 장애 (과민성 장증후군 유사)'],reliefTitle:'즉각 조치 및 전문 관리',relief:[{icon:'🏥',name:'전문의 상담 권고',desc:'2주 이상 지속 시 내분비내과 또는 정신건강의학과 진료를 강력 권장합니다'},{icon:'⏸️',name:'즉각적인 업무 부하 감소',desc:'현재 과제·약속을 과감히 줄이거나 위임. 완벽주의적 기준 일시 낮추기'},{icon:'🌿',name:'아답토젠 허브',desc:'아쉬와간다, 로디올라, 홍경천 등이 코르티솔 과다 분비 억제에 임상 근거 보유'},{icon:'🛁',name:'온열 요법',desc:'38~40°C 반신욕 20분이 부교감 신경계를 강하게 자극해 코르티솔 저하 유도'},{icon:'🧠',name:'인지행동치료(CBT)',desc:'만성 스트레스의 인지적 왜곡 패턴을 수정. 장기 코르티솔 조절에 가장 근거 수준 높음'},{icon:'📵',name:'디지털 디톡스',desc:'하루 2시간 이상 스마트폰·SNS 차단. 정보 과부하가 HPA 축을 지속 자극'}]},
 ];
 
-/* UTILS */
+/* ── UTILS ── */
 function interp(x){
   x=Math.max(0.5,Math.min(7.0,x));
   for(let i=0;i<TABLE.length-1;i++){
@@ -452,63 +437,17 @@ function todayKey(){return toDateKey(new Date());}
 function fmtTab(k){const t=todayKey(),y=toDateKey(new Date(Date.now()-86400000));if(k===t)return'오늘';if(k===y)return'어제';const[,m,d]=k.split('-');return`${+m}/${+d}`;}
 function fmtFull(k){const[yr,m,d]=k.split('-');const dt=new Date(+yr,+m-1,+d);return`${+m}월 ${+d}일 (${DAYS[dt.getDay()]})`;}
 
-/* UI INTERACTION */
-function updateSliderDisplay(val) {
-  document.getElementById('sliderValDisplay').textContent = parseFloat(val).toFixed(1);
-}
-
-/* STORAGE */
+/* ── STORAGE ── */
 const SK='cortisense_v2';
 function loadAll(){try{return JSON.parse(localStorage.getItem(SK))||{};}catch{return{};}}
 function saveAll(d){localStorage.setItem(SK,JSON.stringify(d));}
 function getDay(k){return loadAll()[k]||[];}
 function saveEntry(e){const a=loadAll();if(!a[e.dateKey])a[e.dateKey]=[];a[e.dateKey].push(e);saveAll(a);}
 
-/* BACKUP & RESTORE */
-function exportData() {
-  const data = localStorage.getItem(SK);
-  if (!data || data === '{}') {
-    alert('백업할 데이터가 없습니다.');
-    return;
-  }
-  const blob = new Blob([data], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `cortisense_backup_${todayKey()}.json`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-function importData(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const parsed = JSON.parse(e.target.result);
-      if (typeof parsed === 'object' && parsed !== null) {
-        if (confirm('기존 데이터에 덮어쓰시겠습니까? (이 작업은 취소할 수 없습니다)')) {
-          saveAll(parsed);
-          alert('데이터 복구가 완료되었습니다.');
-          location.reload();
-        }
-      } else {
-        alert('올바르지 않은 파일 형식입니다.');
-      }
-    } catch (err) {
-      alert('파일을 읽는 중 오류가 발생했습니다.');
-    }
-  };
-  reader.readAsText(file);
-}
-
-/* STATE */
+/* ── STATE ── */
 let selDate=todayKey(), myChart=null;
 
-/* CLOCK */
+/* ── CLOCK ── */
 function tick(){
   const n=new Date(),h=n.getHours(),m=n.getMinutes();
   const ap=h<12?'오전':'오후',hh=h%12||12,mm=String(m).padStart(2,'0');
@@ -519,7 +458,7 @@ function tick(){
 }
 setInterval(tick,1000);tick();
 
-/* NAV */
+/* ── NAV ── */
 function gotoPage(name,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -527,7 +466,7 @@ function gotoPage(name,btn){
   btn.classList.add('active');
 }
 
-/* DATE TABS */
+/* ── DATE TABS ── */
 function buildDateTabs(){
   const all=loadAll(),today=todayKey();
   let keys=[...new Set([today,...Object.keys(all)])].sort().reverse().slice(0,14);
@@ -550,15 +489,13 @@ function selectDate(k){
   document.getElementById('chartLbl').textContent=k===todayKey()?'일주기 코르티솔 리듬':`${fmtFull(k)} 코르티솔`;
 }
 
-/* ADD MEASUREMENT */
+/* ── ADD MEASUREMENT ── */
 function addMeasurement(){
-  const slider=document.getElementById('colorSlider');
-  const val=parseFloat(slider.value);
-  
+  const inp=document.getElementById('colorInput');
+  const val=parseFloat(inp.value);
   if(isNaN(val)||val<0.5||val>7.0){
-    alert('비정상적인 입력값입니다.'); return;
+    inp.classList.add('error');setTimeout(()=>inp.classList.remove('error'),900);return;
   }
-  
   const now=new Date(),h=now.getHours(),mn=now.getMinutes();
   const v=interp(val),si=classify(v.mid,h),s=STAGES[si];
   const entry={val,conc:v.mid,lo:v.lo,hi:v.hi,hour:h,min:mn,si,
@@ -569,9 +506,10 @@ function addMeasurement(){
   saveEntry(entry);
   selDate=todayKey();
   buildDateTabs();showResult(entry);updateChart();renderHistory();
+  inp.value='';
 }
 
-/* RESULT STRIP */
+/* ── RESULT STRIP ── */
 function showResult(e){
   const strip=document.getElementById('resultStrip');
   strip.style.display='block';
@@ -588,48 +526,17 @@ function showResult(e){
   strip.style.borderColor=e.stageColor+'44';
 }
 
-/* CHART (Safe Zone Area Fill Added) */
+/* ── CHART ── */
 function buildChart(){
   const ctx=document.getElementById('mainChart').getContext('2d');
   myChart=new Chart(ctx,{
     type:'line',
     data:{
-      labels:Array.from({length:24},(_, i)=>i),
+      labels:Array.from({length:24},(_,i)=>i),
       datasets:[
-        {
-          label: '정상 상한',
-          data:CIR_HI,
-          borderColor:'#4fd1c5',
-          backgroundColor:'rgba(79,209,197,0.06)', // Fill inside the normal range
-          borderWidth:1.5,
-          fill: 1, // Fills down to dataset index 1 (CIR_LO)
-          pointRadius:0,
-          tension:0.4,
-          order:3
-        },
-        {
-          label: '정상 하한',
-          data:CIR_LO,
-          borderColor:'rgba(79,209,197,0.35)',
-          backgroundColor:'transparent',
-          borderWidth:1,
-          borderDash:[4,3],
-          fill: false,
-          pointRadius:0,
-          tension:0.4,
-          order:3
-        },
-        {
-          label: '내 측정값',
-          data:[],
-          type:'scatter',
-          pointRadius:7,
-          pointHoverRadius:9,
-          borderWidth:2,
-          borderColor:'#080c14',
-          backgroundColor:[],
-          order:1
-        }
+        {data:CIR_HI,borderColor:'#4fd1c5',backgroundColor:'rgba(79,209,197,0.07)',borderWidth:1.5,fill:'+1',pointRadius:0,tension:0.4,order:3},
+        {data:CIR_LO,borderColor:'rgba(79,209,197,0.28)',borderDash:[4,3],backgroundColor:'transparent',borderWidth:1,fill:false,pointRadius:0,tension:0.4,order:3},
+        {data:[],type:'scatter',pointRadius:7,pointHoverRadius:9,borderWidth:2,borderColor:'#080c14',backgroundColor:[],order:1}
       ]
     },
     options:{
@@ -672,7 +579,7 @@ function updateChart(){
   myChart.update();
 }
 
-/* HISTORY */
+/* ── HISTORY ── */
 function renderHistory(){
   const panel=document.getElementById('historyPanel');
   const entries=getDay(selDate);
@@ -696,7 +603,7 @@ function renderHistory(){
   panel.innerHTML='';panel.appendChild(ul);
 }
 
-/* SWIPE */
+/* ── SWIPE ── */
 (()=>{
   let sx=0,sy=0;
   const el=document.getElementById('page-measure');
@@ -713,7 +620,7 @@ function renderHistory(){
   },{passive:true});
 })();
 
-/* GUIDE */
+/* ── GUIDE ── */
 function buildGuide(){
   const chips=document.getElementById('stageChips');
   STAGES.forEach((s,i)=>{
@@ -756,7 +663,7 @@ function renderGuideDetail(idx){
     </div>`;
 }
 
-/* ABOUT */
+/* ── ABOUT ── */
 function buildRefTable(){
   const w=document.getElementById('refTable');
   TABLE.forEach(r=>{
@@ -766,10 +673,15 @@ function buildRefTable(){
   });
 }
 
-/* SW */
+/* ── iOS hint ── */
+if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.navigator.standalone){
+  // subtle toast shown once
+}
+
+/* ── SW ── */
 if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 
-/* INIT */
+/* ── INIT ── */
 buildDateTabs();selectDate(todayKey());
 setTimeout(buildChart,80);setTimeout(updateChart,160);
 buildGuide();buildRefTable();
